@@ -70,12 +70,12 @@
 <script type="text/javascript" src="./assets/js/verdor/require/require-min.js"></script>
 <script>
     require(['jquery'], function () {
-        compressImg('upimage', 'showimage', 80, function (src) {
-            console.log(src);
-            image = src;
+        compressImg('upimage', 'showimage', 80, function (imgobj) {
+            image = imgobj.src;
+            alert(image);
         });
 
-        var apiUrl = '';
+       var apiUrl = '';
         var image = '';
 
         function uploadImage() {
@@ -85,10 +85,11 @@
             postData = JSON.stringify(postData);
 
             $.ajax({
-                type: 'POST',
-                url: apiUrl + 'meeting/photo/upload',
+                url: apiUrl + "meeting/photo/upload",
                 contentType:'application/json;charset=utf-8',
                 data: postData,
+                type: 'post',
+                dataType: 'json',
                 success: function(data) {
                    alert(data);
                     document.getElementById('showimage2').src = data.url;
